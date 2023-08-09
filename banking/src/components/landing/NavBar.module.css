@@ -1,0 +1,57 @@
+.navbar {
+  position: relative;
+  width: 100vw;
+  height: 3.5rem;
+  background-color: rgb(38, 117, 220);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 0.5rem;
+}
+
+.logo {
+  position: relative;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.ctawrapper {
+  height: 100%;
+}
+
+.ctaUl {
+  list-style-type: none;
+  display: flex;
+  width: 15rem;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ctaUl li {
+  display: block;
+  color: rgb(226, 220, 220);
+  font-family: "Open Sans", cursive;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.ctaUl li:hover {
+  color: white;
+}
+
+.loginBtn {
+  width: 4rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  border: none;
+  cursor: pointer;
+  font-family: "Open Sans";
+  background-color: yellow;
+  transition: all 0.1s ease-in-out;
+}
+
+.loginBtn:hover {
+  background-color: black;
+  color: yellow;
+}

@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 55rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerContainer {
+  position: relative;
+  width: 62.5rem;
+  height: 25rem;
+  /* border: 1px solid red; */
+  margin-bottom: 5rem;
+  display: flex;
+}
+
+.bannerImg {
+  height: 100%;
+  width: 40rem;
+  border-radius: 0.6rem;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+  transform: translateY(-2rem);
+}
+
+.titleBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: space-evenly;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+  transform: translateY(-2rem);
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0rem);
+}
+
+.hero1 {
+  font-family: "Open Sans";
+  display: block;
+  width: 100%;
+  font-size: 3rem;
+  color: rgb(206, 12, 206);
+  padding-left: 1rem;
+}
+
+.hero2 {
+  font-family: "Open Sans";
+  display: block;
+  width: 100%;
+  font-size: 3rem;
+  color: black;
+  padding-left: 1rem;
+}
+
+.hero3 {
+  font-family: "Open Sans";
+  display: block;
+  width: 100%;
+  font-size: 3rem;
+  color: black;
+  padding-left: 1rem;
+}
+
+.hero4 {
+  font-family: "Open Sans";
+  display: block;
+  width: 100%;
+  font-size: 3rem;
+  color: rgb(206, 12, 206);
+  padding-left: 1rem;
+}
+
+.hero5 {
+  font-family: "Open Sans";
+  display: block;
+  width: 100%;
+  font-size: 3rem;
+  color: black;
+  padding-left: 1rem;
+}
