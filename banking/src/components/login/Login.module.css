@@ -84,3 +84,17 @@
   position: absolute;
   width: 100%;
 }
+
+.arrowBack {
+  color: rgb(220, 211, 211);
+  font-size: 25px;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  position: absolute;
+}
+
+.arrowBack:hover {
+  color: white;
+}

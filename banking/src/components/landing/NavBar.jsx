@@ -1,7 +1,6 @@
 import stl from "./NavBar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons";
-import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {

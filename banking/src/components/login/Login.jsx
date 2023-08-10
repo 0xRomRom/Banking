@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,6 +26,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(false);
   const [errorState, setErrorState] = useState("");
+  const [registering, setRegistering] = useState(false);
 
   const loginHandler = async (e) => {
     setLoginError(false);
@@ -55,40 +58,89 @@ const Login = () => {
 
   const registerHandler = (e) => {
     e.preventDefault();
+    setRegistering(true);
+  };
+
+  const returnToLogin = () => {
+    setRegistering(false);
   };
 
   return (
     <div className={stl.loginpage}>
-      <div className={stl.loginModal}>
-        <form>
-          <div className={stl.nameInput}>
-            <input
-              type="username"
-              className={stl.inputBox}
-              placeholder="Username"
-              ref={usernameRef}
-            />
-          </div>
-          <div className={stl.passInput}>
-            <input
-              type="password"
-              className={stl.inputBox}
-              placeholder="Password"
-              ref={passwordRef}
-            />
-          </div>
-          {loginError ? <span className={stl.errorTxt}>{errorState}</span> : ""}
+      {!registering && (
+        <div className={stl.loginModal}>
+          <form>
+            <div className={stl.nameInput}>
+              <input
+                type="username"
+                className={stl.inputBox}
+                placeholder="Username"
+                ref={usernameRef}
+              />
+            </div>
+            <div className={stl.passInput}>
+              <input
+                type="password"
+                className={stl.inputBox}
+                placeholder="Password"
+                ref={passwordRef}
+              />
+            </div>
+            {loginError ? (
+              <span className={stl.errorTxt}>{errorState}</span>
+            ) : (
+              ""
+            )}
 
-          <div className={stl.ctaBtns}>
-            <button className={stl.ctaBtn} onClick={loginHandler}>
-              Login
-            </button>
-            <button className={stl.ctaBtn} onClick={registerHandler}>
-              Register
-            </button>
-          </div>
-        </form>
-      </div>
+            <div className={stl.ctaBtns}>
+              <button className={stl.ctaBtn} onClick={loginHandler}>
+                Login
+              </button>
+              <button className={stl.ctaBtn} onClick={registerHandler}>
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+      {registering && (
+        <div className={stl.loginModal}>
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            className={stl.arrowBack}
+            onClick={returnToLogin}
+          />
+          <form>
+            <div className={stl.nameInput}>
+              <input
+                type="username"
+                className={stl.inputBox}
+                placeholder="Username"
+                ref={usernameRef}
+              />
+            </div>
+            <div className={stl.passInput}>
+              <input
+                type="password"
+                className={stl.inputBox}
+                placeholder="Password"
+                ref={passwordRef}
+              />
+            </div>
+            {loginError ? (
+              <span className={stl.errorTxt}>{errorState}</span>
+            ) : (
+              ""
+            )}
+
+            <div className={stl.ctaBtns}>
+              <button className={stl.ctaBtn} onClick={registerHandler}>
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
