@@ -1,8 +1,16 @@
 import stl from "./NavBar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons";
+import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
+  const redirectHandler = () => {
+    navigate("login");
+  };
+
   return (
     <nav className={stl.navbar}>
       <FontAwesomeIcon icon={faBuildingColumns} className={stl.logo} />
@@ -13,7 +21,9 @@ const NavBar = () => {
           <li>Partners</li>
         </ul>
       </div>
-      <button className={stl.loginBtn}>Log in</button>
+      <button className={stl.loginBtn} onClick={redirectHandler}>
+        Log in
+      </button>
     </nav>
   );
 };
