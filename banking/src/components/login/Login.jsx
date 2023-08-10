@@ -1,6 +1,10 @@
 import stl from "./Login.module.css";
 import { useRef, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -17,12 +21,14 @@ const firebaseConfig = {
   appId: "1:385341541932:web:8b03ce501816cf78614b89",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const auth = getAuth();
 
 const Login = () => {
-  const usernameRef = useRef("");
-  const passwordRef = useRef("");
+  const loginUsernameRef = useRef("");
+  const loginPasswordRef = useRef("");
+  const registryUsernameRef = useRef("");
+  const registryPasswordRef = useRef("");
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(false);
   const [errorState, setErrorState] = useState("");
@@ -31,12 +37,12 @@ const Login = () => {
   const loginHandler = async (e) => {
     setLoginError(false);
     e.preventDefault();
-    if (usernameRef.current.value.length < 4) {
+    if (loginUsernameRef.current.value.length < 4) {
       setErrorState("Username too short");
       setLoginError(true);
       return;
     }
-    if (passwordRef.current.value.length < 6) {
+    if (loginPasswordRef.current.value.length < 6) {
       setErrorState("Password too short");
       setLoginError(true);
       return;
@@ -44,11 +50,11 @@ const Login = () => {
     try {
       const signIn = await signInWithEmailAndPassword(
         auth,
-        usernameRef.current.value + "@gmail.com",
-        passwordRef.current.value
+        loginUsernameRef.current.value + "@gmail.com",
+        loginPasswordRef.current.value
       );
       navigate("/bank");
-      console.log(signIn);
+      console.log(signIn.user.uid);
     } catch (err) {
       setErrorState("Invalid credentials");
       setLoginError(true);
@@ -56,12 +62,43 @@ const Login = () => {
     }
   };
 
+  const registered = async (e) => {
+    e.preventDefault();
+    setLoginError(false);
+    if (registryUsernameRef.current.value.length < 4) {
+      setErrorState("Username too short");
+      setLoginError(true);
+      return;
+    }
+    if (registryPasswordRef.current.value.length < 6) {
+      setErrorState("Password too short");
+      setLoginError(true);
+      return;
+    }
+
+    try {
+      const register = await createUserWithEmailAndPassword(
+        auth,
+        registryUsernameRef.current.value + "@gmail.com",
+        registryPasswordRef.current.value
+      );
+      console.log(register.user);
+      navigate("/bank");
+    } catch (err) {
+      setLoginError(true);
+      setErrorState("Invalid credentials");
+      console.error(err);
+    }
+  };
+
   const registerHandler = (e) => {
     e.preventDefault();
     setRegistering(true);
+    setLoginError(false);
   };
 
   const returnToLogin = () => {
+    setLoginError(false);
     setRegistering(false);
   };
 
@@ -75,7 +112,7 @@ const Login = () => {
                 type="username"
                 className={stl.inputBox}
                 placeholder="Username"
-                ref={usernameRef}
+                ref={loginUsernameRef}
               />
             </div>
             <div className={stl.passInput}>
@@ -83,7 +120,7 @@ const Login = () => {
                 type="password"
                 className={stl.inputBox}
                 placeholder="Password"
-                ref={passwordRef}
+                ref={loginPasswordRef}
               />
             </div>
             {loginError ? (
@@ -116,7 +153,7 @@ const Login = () => {
                 type="username"
                 className={stl.inputBox}
                 placeholder="Username"
-                ref={usernameRef}
+                ref={registryUsernameRef}
               />
             </div>
             <div className={stl.passInput}>
@@ -124,7 +161,7 @@ const Login = () => {
                 type="password"
                 className={stl.inputBox}
                 placeholder="Password"
-                ref={passwordRef}
+                ref={registryPasswordRef}
               />
             </div>
             {loginError ? (
@@ -134,7 +171,7 @@ const Login = () => {
             )}
 
             <div className={stl.ctaBtns}>
-              <button className={stl.ctaBtn} onClick={registerHandler}>
+              <button className={stl.ctaBtn} onClick={registered}>
                 Register
               </button>
             </div>
