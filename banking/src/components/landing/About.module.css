@@ -1,47 +1,41 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
-
 .container {
   position: relative;
   width: 100vw;
-  height: 55rem;
-  background-color: white;
+  height: 60rem;
+  background-color: blue;
+  background: linear-gradient(
+    to bottom right,
+    transparent 50%,
+    rgb(38, 117, 220) 50%
+  );
+  transform-origin: top right;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.innerContainer {
+.containerInner {
   position: relative;
-  width: 62.5rem;
-  height: 25rem;
-  /* border: 1px solid red; */
-  margin-bottom: 5rem;
-  display: flex;
-}
-
-.bannerImg {
-  height: 100%;
   width: 40rem;
-  border-radius: 0.6rem;
-  opacity: 0;
-  transition: all 1s ease-in-out;
-  transform: translateY(-2rem);
-}
-
-.titleBox {
+  height: 20rem;
+  /* border: 1px solid blue; */
+  margin-left: 5rem;
+  margin-bottom: 5rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
   justify-content: space-evenly;
-  opacity: 0;
-  transition: all 1s ease-in-out;
-  transform: translateY(-2rem);
 }
 
-.fadeIn {
-  opacity: 1;
-  transform: translateY(0rem);
+.containerCopy {
+  position: absolute;
+  width: 50%;
+  left: 50%;
+  height: 100%;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero1 {
@@ -87,4 +81,12 @@
   font-size: 3rem;
   color: black;
   padding-left: 1rem;
+}
+
+.copy {
+  color: white;
+  font-family: "Open Sans";
+  width: 25rem;
+  font-size: 25px;
+  margin-top: 18rem;
 }
