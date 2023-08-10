@@ -52,12 +52,12 @@
   position: relative;
   width: 100%;
   height: 10rem;
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .ctaBtn {
@@ -73,4 +73,14 @@
 
 .ctaBtn:hover {
   background-color: yellow;
+}
+
+.errorTxt {
+  color: red;
+  display: block;
+  text-align: center;
+  font-family: "Open Sans";
+  margin-top: 1rem;
+  position: absolute;
+  width: 100%;
 }
