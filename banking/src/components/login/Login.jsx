@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NavBar from "./NavBar";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,12 +25,13 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const auth = getAuth();
 
-const Login = () => {
+const Login = (props) => {
+  const navigate = useNavigate();
   const loginUsernameRef = useRef("");
   const loginPasswordRef = useRef("");
   const registryUsernameRef = useRef("");
   const registryPasswordRef = useRef("");
-  const navigate = useNavigate();
+
   const [loginError, setLoginError] = useState(false);
   const [errorState, setErrorState] = useState("");
   const [registering, setRegistering] = useState(false);
@@ -55,6 +57,7 @@ const Login = () => {
       );
       navigate("/bank");
       console.log(signIn.user.uid);
+      props.setUser(signIn);
     } catch (err) {
       setErrorState("Invalid credentials");
       setLoginError(true);
@@ -84,6 +87,7 @@ const Login = () => {
       );
       console.log(register.user);
       navigate("/bank");
+      props.setUser(register);
     } catch (err) {
       setLoginError(true);
       setErrorState("Invalid credentials");
@@ -104,6 +108,7 @@ const Login = () => {
 
   return (
     <div className={stl.loginpage}>
+      <NavBar />
       {!registering && (
         <div className={stl.loginModal}>
           <form>
