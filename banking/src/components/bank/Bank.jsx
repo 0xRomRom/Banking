@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import NavBar from "./NavBar";
 import SetupUsername from "./SetupUsername";
+import UserStats from "./UserStats";
 
 const Bank = (props) => {
   const navigate = useNavigate();
@@ -35,6 +36,8 @@ const Bank = (props) => {
           setDisplayName={setDisplayName}
         />
       )}
+      <UserStats />
+      {/* {hasDisplayName && } */}
     </div>
   );
 };

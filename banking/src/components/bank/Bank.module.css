@@ -7,7 +7,7 @@
   background-color: white;
   color: white;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-start;
+  align-content: flex-start;
   font-size: 10rem;
 }

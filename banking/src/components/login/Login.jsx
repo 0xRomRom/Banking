@@ -59,7 +59,6 @@ const Login = (props) => {
         loginPasswordRef.current.value
       );
       navigate("/bank");
-      console.log(signIn.user.uid);
       props.setUser(signIn);
       setLoading(false);
     } catch (err) {
