@@ -90,7 +90,6 @@ const Login = (props) => {
         registryUsernameRef.current.value + "@gmail.com",
         registryPasswordRef.current.value
       );
-      console.log(register.user);
       navigate("/bank");
       props.setUser(register);
     } catch (err) {

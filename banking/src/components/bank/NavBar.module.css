@@ -57,3 +57,17 @@
   background-color: black;
   color: yellow;
 }
+
+.rightblock {
+  position: relative;
+  height: 100%;
+  width: 15rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.username {
+  font-family: "Open Sans";
+  font-size: 1rem;
+}

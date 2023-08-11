@@ -12,12 +12,19 @@ const Bank = (props) => {
   const [displayName, setDisplayName] = useState("");
   const displayRef = useRef();
   const [usernameError, setUsernameError] = useState(false);
+  const [usernameErrorTxt, setUsernameErrorTxt] = useState("");
 
   const nameSetupHandler = (e) => {
     e.preventDefault();
     setUsernameError(false);
-    if (displayRef.current.value.length < 6) {
+    if (displayRef.current.value.length < 5) {
       setUsernameError(true);
+      setUsernameErrorTxt("Username too short");
+      return;
+    }
+    if (displayRef.current.value.length > 15) {
+      setUsernameError(true);
+      setUsernameErrorTxt("Username too long");
       return;
     }
     updateProfile(auth.currentUser, {
@@ -47,11 +54,10 @@ const Bank = (props) => {
       return;
     }
     setHasDisplayName(true);
-    console.log(props.user);
   }, [props.user, navigate, props.user.user?.displayName]);
   return (
     <div className={stl.bankpage}>
-      <NavBar setUser={props.setUser} />
+      <NavBar setUser={props.setUser} user={props.user} />
       {!hasDisplayName && (
         <div className={stl.nameSetup}>
           <form className={stl.form}>
@@ -63,7 +69,7 @@ const Bank = (props) => {
             <input type="username" ref={displayRef} className={stl.nameInput} />
 
             {usernameError && (
-              <span className={stl.errorMsg}>Username too short</span>
+              <span className={stl.errorMsg}>{usernameErrorTxt}</span>
             )}
 
             <button onClick={nameSetupHandler} className={stl.confirm}>

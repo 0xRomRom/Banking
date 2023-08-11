@@ -15,9 +15,14 @@ const NavBar = (props) => {
     <nav className={stl.navbar}>
       <FontAwesomeIcon icon={faBuildingColumns} className={stl.logo} />
 
-      <button className={stl.loginBtn} onClick={redirectHandler}>
-        Log out
-      </button>
+      <div className={stl.rightblock}>
+        <span className={stl.username}>
+          Welcome {props.user.user?.displayName}
+        </span>
+        <button className={stl.loginBtn} onClick={redirectHandler}>
+          Log out
+        </button>
+      </div>
     </nav>
   );
 };
