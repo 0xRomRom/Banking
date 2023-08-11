@@ -10,7 +10,7 @@ function App() {
     <Routes>
       <Route index path="/" element={<Landing />} />
       <Route path="login" element={<Login setUser={setUser} />} />
-      <Route path="bank" element={<Bank user={user} />} />
+      <Route path="bank" element={<Bank user={user} setUser={setUser} />} />
     </Routes>
   );
 }

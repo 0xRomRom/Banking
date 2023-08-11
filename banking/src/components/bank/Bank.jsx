@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { useState, useRef } from "react";
+import NavBar from "./NavBar";
 
 const Bank = (props) => {
   const auth = getAuth();
@@ -50,6 +51,7 @@ const Bank = (props) => {
   }, [props.user, navigate, props.user.user?.displayName]);
   return (
     <div className={stl.bankpage}>
+      <NavBar setUser={props.setUser} />
       {!hasDisplayName && (
         <div className={stl.nameSetup}>
           <form className={stl.form}>

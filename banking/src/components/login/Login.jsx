@@ -10,6 +10,7 @@ import { initializeApp } from "firebase/app";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavBar from "./NavBar";
+import { ThreeCircles } from "react-loader-spinner";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -35,10 +36,12 @@ const Login = (props) => {
   const [loginError, setLoginError] = useState(false);
   const [errorState, setErrorState] = useState("");
   const [registering, setRegistering] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loginHandler = async (e) => {
     setLoginError(false);
     e.preventDefault();
+    setLoading(true);
     if (loginUsernameRef.current.value.length < 4) {
       setErrorState("Username too short");
       setLoginError(true);
@@ -58,10 +61,12 @@ const Login = (props) => {
       navigate("/bank");
       console.log(signIn.user.uid);
       props.setUser(signIn);
+      setLoading(false);
     } catch (err) {
       setErrorState("Invalid credentials");
       setLoginError(true);
       console.error(err);
+      setLoading(false);
     }
   };
 
@@ -136,7 +141,31 @@ const Login = (props) => {
 
             <div className={stl.ctaBtns}>
               <button className={stl.ctaBtn} onClick={loginHandler}>
-                Login
+                {/* Login */}
+                {/* <Audio
+                  height="30"
+                  width="30"
+                  radius="9"
+                  color="green"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle
+                /> */}
+                {loading ? (
+                  <ThreeCircles
+                    height="25"
+                    width="25"
+                    color="#4fa94d"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel="three-circles-rotating"
+                    outerCircleColor=""
+                    innerCircleColor=""
+                    middleCircleColor=""
+                  />
+                ) : (
+                  "Log in"
+                )}
               </button>
               <button className={stl.ctaBtn} onClick={registerHandler}>
                 Register
