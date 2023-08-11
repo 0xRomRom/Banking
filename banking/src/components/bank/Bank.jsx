@@ -8,6 +8,7 @@ import SetupUsername from "./SetupUsername";
 const Bank = (props) => {
   const navigate = useNavigate();
   const [hasDisplayName, setHasDisplayName] = useState(false);
+  const [displayName, setDisplayName] = useState("");
 
   useEffect(() => {
     if (Object.keys(props.user).length === 0) {
@@ -26,9 +27,13 @@ const Bank = (props) => {
         setUser={props.setUser}
         user={props.user}
         hasDisplayName={hasDisplayName}
+        displayName={displayName}
       />
       {!hasDisplayName && (
-        <SetupUsername setHasDisplayname={setHasDisplayName} />
+        <SetupUsername
+          setHasDisplayname={setHasDisplayName}
+          setDisplayName={setDisplayName}
+        />
       )}
     </div>
   );

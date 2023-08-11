@@ -7,7 +7,6 @@ const SetupUsername = (props) => {
   const displayRef = useRef();
   const [usernameError, setUsernameError] = useState(false);
   const [usernameErrorTxt, setUsernameErrorTxt] = useState("");
-  const [displayName, setDisplayName] = useState("");
 
   const nameSetupHandler = (e) => {
     e.preventDefault();
@@ -26,16 +25,12 @@ const SetupUsername = (props) => {
       displayName: displayRef.current.value,
     })
       .then(() => {
-        // Profile updated!
-        // ...
         console.log(auth.currentUser.displayName);
         props.setHasDisplayname(true);
-        setDisplayName(auth.currentUser.displayName);
+        props.setDisplayName(auth.currentUser.displayName);
       })
       .catch((error) => {
         props.setHasDisplayname(false);
-        // An error occurred
-        // ...
       });
   };
 
