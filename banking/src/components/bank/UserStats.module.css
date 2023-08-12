@@ -2,7 +2,7 @@
   position: relative;
   width: 98%;
   left: 1%;
-  height: 20rem;
+  /* height: 30rem; */
   background-color: rgb(116, 116, 221);
   background: linear-gradient(
     90deg,
@@ -24,6 +24,7 @@
 .interestBlock {
   position: relative;
   height: 100%;
+  margin-bottom: 1rem;
 }
 
 .borrowedBlock {
