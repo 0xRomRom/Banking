@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
 import stl from "./History.module.css";
-import { useEffect } from "react";
 import { useState } from "react";
 
 const History = () => {
@@ -76,10 +75,6 @@ const History = () => {
     amount: "asc",
   });
 
-  // useEffect(() => {
-  //   console.log(transactions);
-  // }, [transactions]);
-
   //Filters the type
   const filterByType = (type) => {
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
@@ -90,6 +85,27 @@ const History = () => {
       }
     });
 
+    setFilteredTransactions(sortedTransactions);
+    setSortOrder({
+      ...sortOrder,
+      [type]: sortOrder[type] === "asc" ? "desc" : "asc",
+    });
+  };
+
+  //Filter by amount
+  const filterAmount = (type) => {
+    console.log("Toggling");
+    const sortedTransactions = [...filteredTransactions].sort((a, b) => {
+      if (sortOrder[type] === "asc") {
+        if (a < b) {
+          return a;
+        }
+
+        return a[type] > b[type];
+      } else {
+        // return b[type].localeCompare(a[type]);
+      }
+    });
     setFilteredTransactions(sortedTransactions);
     setSortOrder({
       ...sortOrder,
@@ -122,7 +138,7 @@ const History = () => {
               className={stl.arrows}
             />
           </li>
-          <li className={stl.list}>
+          <li className={stl.list} onClick={filterAmount}>
             Amount
             <FontAwesomeIcon
               icon={faUpRightAndDownLeftFromCenter}
