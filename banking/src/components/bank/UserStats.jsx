@@ -27,7 +27,7 @@ const UserStats = () => {
         </div>
       </div>
       <div className={stl.statsCtaBlock}>
-        <button className={stl.sendBtn}>Send</button>
+        <button className={stl.sendBtn}>Transfer</button>
         <button className={stl.requestLoanBtn}>Request Loan</button>
       </div>
     </div>

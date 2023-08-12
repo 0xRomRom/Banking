@@ -25,7 +25,6 @@ const SetupUsername = (props) => {
       displayName: displayRef.current.value,
     })
       .then(() => {
-        console.log(auth.currentUser.displayName);
         props.setHasDisplayname(true);
         props.setDisplayName(auth.currentUser.displayName);
       })

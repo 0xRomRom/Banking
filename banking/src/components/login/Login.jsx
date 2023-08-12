@@ -11,12 +11,15 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavBar from "./NavBar";
 import { ThreeCircles } from "react-loader-spinner";
+import { getDatabase, ref, set } from "firebase/database";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
   apiKey: "AIzaSyBOxTSNU7cO5Uv0hVAD1jTngG-v72FNKOo",
   authDomain: "banking-3af40.firebaseapp.com",
+  databaseURL:
+    "https://banking-3af40-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "banking-3af40",
   storageBucket: "banking-3af40.appspot.com",
   messagingSenderId: "385341541932",
@@ -26,17 +29,25 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const auth = getAuth();
 
+const db = getDatabase();
+
 const Login = (props) => {
   const navigate = useNavigate();
-  const loginUsernameRef = useRef("");
-  const loginPasswordRef = useRef("");
-  const registryUsernameRef = useRef("");
-  const registryPasswordRef = useRef("");
+  const loginUsernameRef = useRef(null);
+  const loginPasswordRef = useRef(null);
+  const registryUsernameRef = useRef(null);
+  const registryPasswordRef = useRef(null);
 
   const [loginError, setLoginError] = useState(false);
   const [errorState, setErrorState] = useState("");
   const [registering, setRegistering] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const newUser = {
+    balance: 500,
+    savings: 0,
+    borrowed: 0,
+  };
 
   const loginHandler = async (e) => {
     setLoginError(false);
@@ -91,6 +102,9 @@ const Login = (props) => {
         registryUsernameRef.current.value + "@gmail.com",
         registryPasswordRef.current.value
       );
+
+      await set(ref(db, "users/" + register.user.uid), newUser);
+
       navigate("/bank");
       props.setUser(register);
     } catch (err) {
