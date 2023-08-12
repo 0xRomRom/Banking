@@ -94,10 +94,7 @@ const History = () => {
 
   //Filter by amount
   const filterAmount = (type) => {
-    console.log("Toggling");
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
-      console.log(a.amount);
-      console.log(b);
       if (sortOrder[type] === "asc") {
         if (a.amount < b.amount) {
           return 1;
