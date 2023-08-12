@@ -1,16 +1,15 @@
 .container {
   position: relative;
-  width: 100%;
+  width: 98%;
+  left: 1%;
   height: 20rem;
   background-color: rgb(116, 116, 221);
   background: linear-gradient(
     90deg,
-    rgb(116, 116, 221),
+    rgb(92, 92, 218),
     rgba(103, 103, 239, 0.941)
   );
-  margin-top: 5rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-top: 4.5rem;
   border-radius: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -19,7 +18,16 @@
 
 .balanceBlock {
   position: relative;
-  width: 30rem;
+  height: 100%;
+}
+
+.interestBlock {
+  position: relative;
+  height: 100%;
+}
+
+.borrowedBlock {
+  position: relative;
   height: 100%;
 }
 
@@ -54,7 +62,7 @@
   width: 9rem;
   height: 3rem;
   border-radius: 0.3rem;
-  background-color: rgb(147, 194, 17);
+  background-color: rgb(65, 206, 65);
   color: white;
   border: none;
   outline: none;
@@ -63,6 +71,7 @@
   font-weight: bold;
   cursor: pointer;
   border: 2px solid transparent;
+  transition: all 0.1s ease-in-out;
 }
 
 .sendBtn:hover {
@@ -75,7 +84,7 @@
   width: 9rem;
   height: 3rem;
   border-radius: 0.3rem;
-  background-color: rgb(237, 97, 50);
+  background-color: rgb(222, 12, 12);
   color: white;
   border: none;
   outline: none;
@@ -84,9 +93,78 @@
   font-weight: bold;
   cursor: pointer;
   border: 2px solid transparent;
+  transition: all 0.1s ease-in-out;
 }
 
 .requestLoanBtn:hover {
+  background-color: black;
+  color: white;
+}
+
+.green {
+  color: rgb(65, 206, 65);
+}
+
+.red {
+  color: rgb(222, 12, 12);
+}
+
+.statsCtaBtnBox {
+  position: relative;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.statsCtaBtnBox2 {
+  position: relative;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0rem;
+}
+
+.depositBtn {
+  width: 5rem;
+  height: 2rem;
+  background-color: rgb(65, 206, 65);
+  border-radius: 0.2rem;
+  color: white;
+  font-family: "Open Sans";
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.depositBtn:hover {
+  background-color: black;
+  color: white;
+}
+
+.withdrawBtn {
+  width: 5rem;
+  height: 2rem;
+  background-color: rgb(222, 12, 12);
+  border-radius: 0.2rem;
+  color: white;
+  font-family: "Open Sans";
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.withdrawBtn:hover {
   background-color: black;
   color: white;
 }

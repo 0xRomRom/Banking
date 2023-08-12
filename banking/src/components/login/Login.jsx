@@ -45,11 +45,13 @@ const Login = (props) => {
     if (loginUsernameRef.current.value.length < 4) {
       setErrorState("Username too short");
       setLoginError(true);
+      setLoading(false);
       return;
     }
     if (loginPasswordRef.current.value.length < 6) {
       setErrorState("Password too short");
       setLoginError(true);
+      setLoading(false);
       return;
     }
     try {
@@ -139,15 +141,6 @@ const Login = (props) => {
 
             <div className={stl.ctaBtns}>
               <button className={stl.ctaBtn} onClick={loginHandler}>
-                {/* Login */}
-                {/* <Audio
-                  height="30"
-                  width="30"
-                  radius="9"
-                  color="green"
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle
-                /> */}
                 {loading ? (
                   <ThreeCircles
                     height="25"

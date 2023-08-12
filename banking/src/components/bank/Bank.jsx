@@ -5,6 +5,7 @@ import { useState } from "react";
 import NavBar from "./NavBar";
 import SetupUsername from "./SetupUsername";
 import UserStats from "./UserStats";
+import History from "./History";
 
 const Bank = (props) => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const Bank = (props) => {
         />
       )}
       <UserStats />
-      {/* {hasDisplayName && } */}
+      <History />
     </div>
   );
 };

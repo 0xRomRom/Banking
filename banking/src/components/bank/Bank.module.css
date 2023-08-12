@@ -8,6 +8,7 @@
   color: white;
   display: flex;
   justify-content: flex-start;
-  align-content: flex-start;
+  align-content: center;
+  flex-direction: column;
   font-size: 10rem;
 }
