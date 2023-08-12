@@ -8,13 +8,13 @@ const History = () => {
     {
       type: "In",
       date: "11/05/2023",
-      toFrom: "James B",
+      toFrom: "Demian",
       amount: 133.2,
     },
     {
       type: "Out",
       date: "15/06/2023",
-      toFrom: "Bob Marley",
+      toFrom: "Amber",
       amount: 219,
     },
     {
@@ -26,7 +26,7 @@ const History = () => {
     {
       type: "Out",
       date: "15/06/2023",
-      toFrom: "Bob Marley",
+      toFrom: "Lisa",
       amount: 419,
     },
     {
@@ -111,6 +111,35 @@ const History = () => {
         }
         return 0;
       }
+      return 0;
+    });
+    setFilteredTransactions(sortedTransactions);
+    setSortOrder({
+      ...sortOrder,
+      [type]: sortOrder[type] === "asc" ? "desc" : "asc",
+    });
+  };
+
+  //Filter To/From
+  const filterToFrom = (type) => {
+    const sortedTransactions = [...filteredTransactions].sort((a, b) => {
+      if (sortOrder[type] === "asc") {
+        if (a.toFrom < b.toFrom) {
+          return 1;
+        } else if (a.toFrom > b.toFrom) {
+          return -1;
+        }
+        return 0;
+      }
+      if (sortOrder[type] === "desc") {
+        if (a.toFrom < b.toFrom) {
+          return -1;
+        } else if (a.toFrom > b.toFrom) {
+          return 1;
+        }
+        return 0;
+      }
+      return 0;
     });
     setFilteredTransactions(sortedTransactions);
     setSortOrder({
@@ -137,7 +166,7 @@ const History = () => {
               className={stl.arrows}
             />
           </li>
-          <li className={stl.list}>
+          <li className={stl.list} onClick={() => filterToFrom("toFrom")}>
             To/From
             <FontAwesomeIcon
               icon={faUpRightAndDownLeftFromCenter}
@@ -166,19 +195,6 @@ const History = () => {
             </div>
           );
         })}
-
-        {/* {transactions.map((item) => {
-          return (
-            <div className={stl.gridRow} key={Math.random()}>
-              <span className={`${stl.rowSpan} ${stl.centered}`}>
-                {item.type}
-              </span>
-              <span className={stl.rowSpan}>{item.date}</span>
-              <span className={stl.rowSpan}>{item.toFrom}</span>
-              <span className={stl.rowSpan}>{item.amount}</span>
-            </div>
-          );
-        })} */}
       </div>
     </div>
   );
