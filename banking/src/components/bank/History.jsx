@@ -15,13 +15,13 @@ const History = () => {
       type: "Out",
       date: "15/06/2023",
       toFrom: "Bob Marley",
-      amount: 419,
+      amount: 219,
     },
     {
       type: "In",
       date: "11/05/2023",
       toFrom: "James B",
-      amount: 133.2,
+      amount: 513.2,
     },
     {
       type: "Out",
@@ -33,13 +33,13 @@ const History = () => {
       type: "In",
       date: "11/05/2023",
       toFrom: "James B",
-      amount: 133.2,
+      amount: 15,
     },
     {
       type: "Out",
       date: "15/06/2023",
       toFrom: "Bob Marley",
-      amount: 419,
+      amount: 99,
     },
     {
       type: "In",
@@ -96,14 +96,23 @@ const History = () => {
   const filterAmount = (type) => {
     console.log("Toggling");
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
+      console.log(a.amount);
+      console.log(b);
       if (sortOrder[type] === "asc") {
-        if (a < b) {
-          return a;
+        if (a.amount < b.amount) {
+          return 1;
+        } else if (a.amount > b.amount) {
+          return -1;
         }
-
-        return a[type] > b[type];
-      } else {
-        // return b[type].localeCompare(a[type]);
+        return 0;
+      }
+      if (sortOrder[type] === "desc") {
+        if (a.amount < b.amount) {
+          return -1;
+        } else if (a.amount > b.amount) {
+          return 1;
+        }
+        return 0;
       }
     });
     setFilteredTransactions(sortedTransactions);
@@ -138,7 +147,7 @@ const History = () => {
               className={stl.arrows}
             />
           </li>
-          <li className={stl.list} onClick={filterAmount}>
+          <li className={stl.list} onClick={() => filterAmount("amount")}>
             Amount
             <FontAwesomeIcon
               icon={faUpRightAndDownLeftFromCenter}
