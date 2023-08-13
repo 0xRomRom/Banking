@@ -1,6 +1,6 @@
 import stl from "./TransferModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faList } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { get, getDatabase, ref, child } from "firebase/database";
 
@@ -13,7 +13,10 @@ const TransferModal = (props) => {
     get(dbref, "users/").then((snapshot) => {
       const data = snapshot.val();
       const converted = Object.entries(data.users);
-      setCurrentUsers(converted);
+      const filteredArray = converted.filter(
+        ([key]) => key !== props.user.user.uid
+      );
+      setCurrentUsers(filteredArray);
     });
   }, []);
 
@@ -24,11 +27,6 @@ const TransferModal = (props) => {
 
   const closeModal = () => {
     props.setShowTransferModal(() => !props.showTransferModal);
-  };
-
-  const recipientPicked = () => {
-    setPickingRecipient(() => !pickingRecipient);
-    // console.log(user[1].displayName);
   };
 
   return (
@@ -51,6 +49,18 @@ const TransferModal = (props) => {
             <label className={stl.dollar}>$</label>
             <input type="number" className={stl.inputBox} placeholder="0.00" />
             <span className={stl.to}>To</span>
+            {!pickingRecipient && (
+              <>
+                <span className={stl.pickedRecipient}>
+                  {recipient} <br /> {recipientUID}
+                </span>
+                <FontAwesomeIcon
+                  icon={faList}
+                  className={stl.listIcon}
+                  onClick={() => setPickingRecipient(!pickingRecipient)}
+                />
+              </>
+            )}
             {pickingRecipient && (
               <div className={stl.recipientsBox}>
                 {currentUsers.map((user) => {
@@ -65,6 +75,7 @@ const TransferModal = (props) => {
                       }}
                     >
                       {user[1].displayName}
+                      <span className={stl.bankAccount}>{[user[1].uid]}</span>
                     </div>
                   );
                 })}
