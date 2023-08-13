@@ -47,6 +47,7 @@ const Login = (props) => {
     balance: 500,
     savings: 0,
     borrowed: 0,
+    displayName: "",
   };
 
   const loginHandler = async (e) => {
@@ -71,8 +72,8 @@ const Login = (props) => {
         loginUsernameRef.current.value + "@gmail.com",
         loginPasswordRef.current.value
       );
-      navigate("/bank");
       props.setUser(signIn);
+      navigate("/bank");
       setLoading(false);
     } catch (err) {
       setErrorState("Invalid credentials");

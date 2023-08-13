@@ -1,12 +1,16 @@
 import stl from "./SetupUsername.module.css";
 import { useRef, useState } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
+import { getDatabase, ref, set, child, get } from "firebase/database";
+// import { get, getDatabase, ref, child } from "firebase/database";
 
 const SetupUsername = (props) => {
   const auth = getAuth();
   const displayRef = useRef();
   const [usernameError, setUsernameError] = useState(false);
   const [usernameErrorTxt, setUsernameErrorTxt] = useState("");
+
+  const db = getDatabase();
 
   const nameSetupHandler = (e) => {
     e.preventDefault();
@@ -27,6 +31,14 @@ const SetupUsername = (props) => {
       .then(() => {
         props.setHasDisplayname(true);
         props.setDisplayName(auth.currentUser.displayName);
+
+        const dbref = ref(db);
+
+        get(child(dbref, "users/" + auth.currentUser.uid)).then((snapshot) => {
+          let data = snapshot.val();
+          data.displayName = auth.currentUser.displayName;
+          set(ref(db, "users/" + auth.currentUser.uid), data);
+        });
       })
       .catch((error) => {
         props.setHasDisplayname(false);

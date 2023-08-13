@@ -37,7 +37,7 @@ const Bank = (props) => {
           setDisplayName={setDisplayName}
         />
       )}
-      <UserStats />
+      <UserStats user={props.user} displayName={displayName} />
       <History />
     </div>
   );
