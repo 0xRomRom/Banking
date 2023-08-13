@@ -43,11 +43,12 @@ const Login = (props) => {
   const [registering, setRegistering] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const newUser = {
+  let newUser = {
     balance: 500,
     savings: 0,
     borrowed: 0,
     displayName: "",
+    uid: "",
   };
 
   const loginHandler = async (e) => {
@@ -103,7 +104,7 @@ const Login = (props) => {
         registryUsernameRef.current.value + "@gmail.com",
         registryPasswordRef.current.value
       );
-
+      newUser.uid = register.user.uid;
       await set(ref(db, "users/" + register.user.uid), newUser);
 
       navigate("/bank");
