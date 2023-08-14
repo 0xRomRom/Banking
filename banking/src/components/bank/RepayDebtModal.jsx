@@ -1,4 +1,4 @@
-import stl from "./RequestLoanModal.module.css";
+import stl from "./RepayDebtModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faList } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
@@ -7,20 +7,20 @@ import { ThreeCircles } from "react-loader-spinner";
 
 const db = getDatabase();
 
-const RequestLoanModal = (props) => {
+const RepayDebtModal = (props) => {
   const loanAmountRef = useRef(null);
   const [requestLoanBtnDisabled, setRequestLoanBtnDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [insuffucientBalance, setInsufficientBalance] = useState(false);
 
   const closeModal = () => {
-    props.showRequestLoanModal(() => !props.showRequestLoanModal);
+    props.setShowRepayDebtModal((modal) => !modal);
   };
 
-  const requestLoan = async () => {
+  const repayDebt = async () => {
     const amount = +loanAmountRef.current.value;
     if (amount === 0 || isNaN(amount)) return;
-    if (amount > 5000 - +props.borrowed) {
+    if (amount > props.balance) {
       setInsufficientBalance(true);
       return;
     }
@@ -33,16 +33,16 @@ const RequestLoanModal = (props) => {
     await get(dbref, "users/" + props.user.user.uid).then((snapshot) => {
       let data = snapshot.val();
       const borrowedBalance = +data.users[props.user.user.uid].borrowed;
-      const newBalance = borrowedBalance + amount;
+      const newBalance = borrowedBalance - amount;
       data.users[props.user.user.uid].borrowed = newBalance;
 
       const currentBalance = +data.users[props.user.user.uid].balance;
-      const addedBalance = currentBalance + amount;
+      const addedBalance = currentBalance - amount;
       data.users[props.user.user.uid].balance = addedBalance;
 
       addTransaction(
         amount,
-        "Loan (in)",
+        "Loan (out)",
         data.users[props.user.user.uid].displayName,
         "Bank"
       );
@@ -92,9 +92,11 @@ const RequestLoanModal = (props) => {
             <h2 className={stl.balance}>Debt</h2>
             <span className={stl.balanceAmount}>$ {props.borrowed}</span>
           </div>
-          <span className={stl.amount}>Maximum Loan</span>
-          <span className={stl.maxAmount}>$ {5000 - props.borrowed}</span>
-          <span className={stl.amount}>Loan Amount</span>
+          <span className={stl.amount}>Maximum Repayment</span>
+          <span className={stl.maxAmount}>
+            $ {props.borrowed > props.balance ? props.balance : props.borrowed}
+          </span>
+          <span className={stl.amount}>Repayment Amount</span>
           <label
             className={`${stl.dollar} ${
               insuffucientBalance ? stl.dollarRed : ""
@@ -117,7 +119,7 @@ const RequestLoanModal = (props) => {
 
           <button
             className={stl.requestBtn}
-            onClick={requestLoan}
+            onClick={repayDebt}
             disabled={requestLoanBtnDisabled}
           >
             {loading ? (
@@ -134,7 +136,7 @@ const RequestLoanModal = (props) => {
                 middleCircleColor=""
               />
             ) : (
-              "Request Loan"
+              "Repay Debt"
             )}
           </button>
         </div>
@@ -143,4 +145,4 @@ const RequestLoanModal = (props) => {
   );
 };
 
-export default RequestLoanModal;
+export default RepayDebtModal;

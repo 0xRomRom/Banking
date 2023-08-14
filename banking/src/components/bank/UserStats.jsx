@@ -3,6 +3,7 @@ import { get, getDatabase, ref, child } from "firebase/database";
 import { useEffect, useState } from "react";
 import TransferModal from "./TransferModal";
 import RequestLoanModal from "./RequestLoanModal";
+import RepayDebtModal from "./RepayDebtModal";
 
 const db = getDatabase();
 
@@ -11,7 +12,8 @@ const UserStats = (props) => {
   const [savings, setSavings] = useState(0);
   const [borrowed, setBorrowed] = useState(0);
   const [showTransferModal, setShowTransferModal] = useState(false);
-  const [showRequestLoanModal, setShowRequestLoanModal] = useState(true);
+  const [showRequestLoanModal, setShowRequestLoanModal] = useState(false);
+  const [showRepayDebtModal, setShowRepayDebtModal] = useState(false);
 
   useEffect(() => {
     const dbref = ref(db);
@@ -30,6 +32,10 @@ const UserStats = (props) => {
 
   const openRequestLoanModal = () => {
     setShowRequestLoanModal(() => !showRequestLoanModal);
+  };
+
+  const openRepayDebtModal = () => {
+    setShowRepayDebtModal(() => !showRepayDebtModal);
   };
 
   return (
@@ -57,7 +63,9 @@ const UserStats = (props) => {
           <h2 className={stl.balanceTitle}>Debt</h2>
           <span className={stl.balanceAmount}>$ {borrowed}</span>
           <div className={stl.statsCtaBtnBox2}>
-            <button className={stl.depositBtn}>Repay</button>
+            <button className={stl.depositBtn} onClick={openRepayDebtModal}>
+              Repay
+            </button>
           </div>
         </div>
         <div className={stl.statsCtaBlock}>
@@ -86,6 +94,17 @@ const UserStats = (props) => {
           borrowed={borrowed}
           setBorrowed={setBorrowed}
           setBalance={setBalance}
+          user={props.user}
+          setTransact={props.setTransact}
+        />
+      )}
+      {showRepayDebtModal && (
+        <RepayDebtModal
+          borrowed={borrowed}
+          setBorrowed={setBorrowed}
+          balance={balance}
+          setBalance={setBalance}
+          setShowRepayDebtModal={setShowRepayDebtModal}
           user={props.user}
           setTransact={props.setTransact}
         />
