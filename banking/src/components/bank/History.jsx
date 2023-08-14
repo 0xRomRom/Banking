@@ -37,9 +37,9 @@ const History = (props) => {
   const filterByType = (type) => {
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
       if (sortOrder[type] === "asc") {
-        return a[type].localeCompare(b[type]);
+        return a[1][type].localeCompare(b[1][type]);
       } else {
-        return b[type].localeCompare(a[type]);
+        return b[1][type].localeCompare(a[1][type]);
       }
     });
 
@@ -54,23 +54,24 @@ const History = (props) => {
   const filterAmount = (type) => {
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
       if (sortOrder[type] === "asc") {
-        if (a.amount < b.amount) {
+        if (a[1].amount < b[1].amount) {
           return 1;
-        } else if (a.amount > b.amount) {
+        } else if (a[1].amount > b[1].amount) {
           return -1;
         }
         return 0;
       }
       if (sortOrder[type] === "desc") {
-        if (a.amount < b.amount) {
+        if (a[1].amount < b[1].amount) {
           return -1;
-        } else if (a.amount > b.amount) {
+        } else if (a[1].amount > b[1].amount) {
           return 1;
         }
         return 0;
       }
       return 0;
     });
+    // console.log(sortedTransactions);
     setFilteredTransactions(sortedTransactions);
     setSortOrder({
       ...sortOrder,
@@ -82,17 +83,17 @@ const History = (props) => {
   const filterToFrom = (type) => {
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
       if (sortOrder[type] === "asc") {
-        if (a.toFrom < b.toFrom) {
+        if (a[1].toFrom < b[1].toFrom) {
           return 1;
-        } else if (a.toFrom > b.toFrom) {
+        } else if (a[1].toFrom > b[1].toFrom) {
           return -1;
         }
         return 0;
       }
       if (sortOrder[type] === "desc") {
-        if (a.toFrom < b.toFrom) {
+        if (a[1].toFrom < b[1].toFrom) {
           return -1;
-        } else if (a.toFrom > b.toFrom) {
+        } else if (a[1].toFrom > b[1].toFrom) {
           return 1;
         }
         return 0;
@@ -109,8 +110,8 @@ const History = (props) => {
   //Filter by date
   const filterByDate = (type) => {
     const sortedTransactions = [...filteredTransactions].sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+      const dateA = new Date(a[1].date);
+      const dateB = new Date(b[1].date);
 
       if (sortOrder[type] === "asc") {
         return dateA - dateB;
@@ -162,7 +163,6 @@ const History = (props) => {
       </div>
       <div className={stl.listGrid}>
         {filteredTransactions.map((item) => {
-          console.log(item[1].date);
           return (
             <div className={stl.gridRow} key={Math.random()}>
               <span className={`${stl.rowSpan} ${stl.centered}`}>
