@@ -2,6 +2,7 @@ import stl from "./UserStats.module.css";
 import { get, getDatabase, ref, child } from "firebase/database";
 import { useEffect, useState } from "react";
 import TransferModal from "./TransferModal";
+import RequestLoanModal from "./RequestLoanModal";
 
 const db = getDatabase();
 
@@ -10,6 +11,7 @@ const UserStats = (props) => {
   const [savings, setSavings] = useState(0);
   const [borrowed, setBorrowed] = useState(0);
   const [showTransferModal, setShowTransferModal] = useState(false);
+  const [showRequestLoanModal, setShowRequestLoanModal] = useState(true);
 
   useEffect(() => {
     const dbref = ref(db);
@@ -24,6 +26,10 @@ const UserStats = (props) => {
 
   const openTransferModal = () => {
     setShowTransferModal(() => !showTransferModal);
+  };
+
+  const openRequestLoanModal = () => {
+    setShowRequestLoanModal(() => !showRequestLoanModal);
   };
 
   return (
@@ -48,7 +54,7 @@ const UserStats = (props) => {
           </div>
         </div>
         <div className={stl.borrowedBlock}>
-          <h2 className={stl.balanceTitle}>Borrowed</h2>
+          <h2 className={stl.balanceTitle}>Debt</h2>
           <span className={stl.balanceAmount}>$ {borrowed}</span>
           <div className={stl.statsCtaBtnBox2}>
             <button className={stl.depositBtn}>Repay</button>
@@ -58,7 +64,9 @@ const UserStats = (props) => {
           <button className={stl.sendBtn} onClick={openTransferModal}>
             Transfer
           </button>
-          <button className={stl.requestLoanBtn}>Request Loan</button>
+          <button className={stl.requestLoanBtn} onClick={openRequestLoanModal}>
+            Request Loan
+          </button>
         </div>
       </div>
       {showTransferModal && (
@@ -69,6 +77,16 @@ const UserStats = (props) => {
           displayName={props.displayName}
           setShowTransferModal={setShowTransferModal}
           showTransferModal={showTransferModal}
+          setTransact={props.setTransact}
+        />
+      )}
+      {showRequestLoanModal && (
+        <RequestLoanModal
+          showRequestLoanModal={setShowRequestLoanModal}
+          borrowed={borrowed}
+          setBorrowed={setBorrowed}
+          setBalance={setBalance}
+          user={props.user}
           setTransact={props.setTransact}
         />
       )}

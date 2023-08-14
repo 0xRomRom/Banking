@@ -12,20 +12,38 @@ const db = getDatabase();
 const History = (props) => {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   useEffect(() => {
+    fetchTransactionList();
+  }, [props.transact, props.displayName]);
+
+  const fetchTransactionList = async () => {
+    if (!props.displayName) return;
     if (props.displayName) {
       const dbref = ref(db);
-      get(dbref, "transactions/" + props.displayName + "/").then((snapshot) => {
-        const data = snapshot.val();
-        if (data.transactions[props.displayName]) {
+      await Promise.all[
+        (get(dbref, "transactions/" + props.displayName + "/").then(
+          (snapshot) => {
+            const data = snapshot.val();
+            if (!data.transactions) return;
+            const converted = Object.entries(
+              data.transactions[props.displayName]
+            );
+            return setFilteredTransactions(converted);
+          }
+        ),
+        await get(dbref, "transactions/" + "Bank" + "/").then((snapshot) => {
+          const data = snapshot.val();
           if (data.transactions === undefined) return;
-          const converted = Object.entries(
-            data.transactions[props.displayName]
-          );
-          setFilteredTransactions(converted);
-        }
-      });
+          let tempArray = [];
+          for (const key in data.transactions["Bank"]) {
+            if (data.transactions["Bank"][key].toFrom === props.displayName) {
+              tempArray.push([key, data.transactions["Bank"][key]]);
+            }
+          }
+          return setFilteredTransactions((prev) => [...prev, ...tempArray]);
+        }))
+      ];
     }
-  }, [props.displayName, props.transact]);
+  };
 
   const [sortOrder, setSortOrder] = useState({
     type: "asc",
@@ -174,7 +192,9 @@ const History = (props) => {
                   {item[1].type}
                 </span>
                 <span className={stl.rowSpan}>{item[1].date.slice(0, 25)}</span>
-                <span className={stl.rowSpan}>{item[1].toFrom}</span>
+                <span className={stl.rowSpan}>
+                  {item[1].type === "Loan (in)" ? "Bank" : item[1].toFrom}
+                </span>
                 <span className={stl.rowSpan}>{item[1].amount}</span>
               </div>
             );
