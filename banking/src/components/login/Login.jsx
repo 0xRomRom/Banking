@@ -97,6 +97,7 @@ const Login = (props) => {
       setLoginError(true);
       return;
     }
+    setLoading(true);
 
     try {
       const register = await createUserWithEmailAndPassword(
@@ -114,6 +115,7 @@ const Login = (props) => {
       setErrorState("Invalid credentials");
       console.error(err);
     }
+    setLoading(false);
   };
 
   const registerHandler = (e) => {
@@ -213,7 +215,22 @@ const Login = (props) => {
 
             <div className={stl.ctaBtns}>
               <button className={stl.ctaBtn} onClick={registered}>
-                Register
+                {loading ? (
+                  <ThreeCircles
+                    height="25"
+                    width="25"
+                    color="#4fa94d"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel="three-circles-rotating"
+                    outerCircleColor=""
+                    innerCircleColor=""
+                    middleCircleColor=""
+                  />
+                ) : (
+                  "Register"
+                )}
               </button>
             </div>
           </form>

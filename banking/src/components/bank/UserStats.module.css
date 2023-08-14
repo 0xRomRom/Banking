@@ -44,6 +44,9 @@
   font-size: 3rem;
   display: block;
   margin-left: 2rem;
+  background: linear-gradient(180deg, white, rgb(173, 172, 172));
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .statsCtaBlock {
@@ -102,7 +105,9 @@
 }
 
 .green {
-  color: rgb(65, 206, 65);
+  background: linear-gradient(50deg, #39b329, #12b512);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .red {

@@ -90,6 +90,9 @@
   font-size: 17px;
   width: 20%;
   padding-left: 1rem;
+  background: linear-gradient(180deg, white, lightgray);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .centered {
