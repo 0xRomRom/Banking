@@ -24,6 +24,14 @@ const RepayDebtModal = (props) => {
       setInsufficientBalance(true);
       return;
     }
+    if (amount > props.borrowed) {
+      setInsufficientBalance(true);
+      return;
+    }
+    if (amount < 0) {
+      setInsufficientBalance(true);
+      return;
+    }
 
     setRequestLoanBtnDisabled(true);
     setLoading(true);
