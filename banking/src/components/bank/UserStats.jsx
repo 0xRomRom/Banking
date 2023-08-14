@@ -5,6 +5,7 @@ import TransferModal from "./TransferModal";
 import RequestLoanModal from "./RequestLoanModal";
 import RepayDebtModal from "./RepayDebtModal";
 import DepositModal from "./DepositModal";
+import WithdrawModal from "./WithdrawModal";
 
 const db = getDatabase();
 
@@ -16,6 +17,7 @@ const UserStats = (props) => {
   const [showRequestLoanModal, setShowRequestLoanModal] = useState(false);
   const [showRepayDebtModal, setShowRepayDebtModal] = useState(false);
   const [showDepositModal, setShowDepositModal] = useState(false);
+  const [showWithdrawModal, setShowWithdrawModal] = useState(false);
 
   useEffect(() => {
     const dbref = ref(db);
@@ -44,6 +46,10 @@ const UserStats = (props) => {
     setShowDepositModal(() => !showDepositModal);
   };
 
+  const openWithdrawModal = () => {
+    setShowWithdrawModal(() => !showWithdrawModal);
+  };
+
   return (
     <>
       <div className={stl.container}>
@@ -64,7 +70,9 @@ const UserStats = (props) => {
             <button className={stl.depositBtn} onClick={openDepositModal}>
               Deposit
             </button>
-            <button className={stl.withdrawBtn}>Withdraw</button>
+            <button className={stl.withdrawBtn} onClick={openWithdrawModal}>
+              Withdraw
+            </button>
           </div>
         </div>
         <div className={stl.borrowedBlock}>
@@ -127,6 +135,19 @@ const UserStats = (props) => {
           setShowDepositModal={setShowDepositModal}
           user={props.user}
           setTransact={props.setTransact}
+        />
+      )}
+      {showWithdrawModal && (
+        <WithdrawModal
+          borrowed={borrowed}
+          setBorrowed={setBorrowed}
+          balance={balance}
+          setBalance={setBalance}
+          setSavings={setSavings}
+          setShowWithdrawModal={setShowWithdrawModal}
+          user={props.user}
+          setTransact={props.setTransact}
+          savings={savings}
         />
       )}
     </>
