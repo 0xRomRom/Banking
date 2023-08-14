@@ -16,15 +16,18 @@ const History = (props) => {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   useEffect(() => {
     if (props.displayName) {
-      console.log(props.displayName);
       const dbref = ref(db);
       get(dbref, "transactions/" + props.displayName + "/").then((snapshot) => {
         const data = snapshot.val();
-        const converted = Object.entries(data.transactions[props.displayName]);
-        setFilteredTransactions(converted);
+        if (data.transactions[props.displayName]) {
+          const converted = Object.entries(
+            data.transactions[props.displayName]
+          );
+          setFilteredTransactions(converted);
+        }
       });
     }
-  }, [props.displayName]);
+  }, [props.displayName, props.transacted]);
 
   const [sortOrder, setSortOrder] = useState({
     type: "asc",
@@ -71,7 +74,6 @@ const History = (props) => {
       }
       return 0;
     });
-    // console.log(sortedTransactions);
     setFilteredTransactions(sortedTransactions);
     setSortOrder({
       ...sortOrder,

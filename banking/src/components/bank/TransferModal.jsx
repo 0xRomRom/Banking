@@ -99,6 +99,8 @@ const TransferModal = (props) => {
     } catch (error) {
       console.error("Error transferring funds:", error);
     }
+    transferAmountRef.current.value = 0;
+    props.setTransacted((trans) => !trans);
 
     setLoading(false);
     setTransferBtnDisabled(false);
@@ -125,6 +127,10 @@ const TransferModal = (props) => {
     );
   };
 
+  const setMaxBalance = () => {
+    transferAmountRef.current.value = props.balance;
+  };
+
   return (
     <div className={stl.container}>
       <div className={stl.modal}>
@@ -136,7 +142,9 @@ const TransferModal = (props) => {
           />
           <div className={stl.balanceBox}>
             <h2 className={stl.balance}>Balance</h2>
-            <span className={stl.balanceAmount}>$ {props.balance}</span>
+            <span className={stl.balanceAmount} onClick={setMaxBalance}>
+              $ {props.balance}
+            </span>
           </div>
           <div className={stl.fromToBox}>
             <span className={stl.from}>From</span>
@@ -156,7 +164,10 @@ const TransferModal = (props) => {
               }`}
               placeholder="0.00"
               ref={transferAmountRef}
-              onChange={() => setInsufficientBalance(false)}
+              onChange={(e) => {
+                setInsufficientBalance(false);
+                e.target.value = transferAmountRef.current.value;
+              }}
             />
             <span className={stl.to}>To</span>
             {!pickingRecipient && (

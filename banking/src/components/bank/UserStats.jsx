@@ -69,6 +69,7 @@ const UserStats = (props) => {
           displayName={props.displayName}
           setShowTransferModal={setShowTransferModal}
           showTransferModal={showTransferModal}
+          setTransacted={props.setTransacted}
         />
       )}
     </>

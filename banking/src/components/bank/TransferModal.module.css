@@ -49,6 +49,7 @@
   font-family: "Open Sans";
   position: relative;
   display: block;
+  user-select: none;
 }
 
 .fromToBox {
