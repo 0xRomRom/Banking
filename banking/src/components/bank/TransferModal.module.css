@@ -204,3 +204,27 @@ input[type="number"] {
   font-size: 12px;
   color: lightgray;
 }
+
+.bankAccountListed {
+  font-size: 12px;
+  color: lightgray;
+}
+
+.transferBtn {
+  display: block;
+  width: 86%;
+  height: 2rem;
+  background-color: rgb(237, 237, 19);
+  color: black;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.transferBtn:hover {
+  background-color: yellow;
+}

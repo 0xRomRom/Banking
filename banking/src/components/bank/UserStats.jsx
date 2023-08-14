@@ -64,6 +64,7 @@ const UserStats = (props) => {
       {showTransferModal && (
         <TransferModal
           balance={balance}
+          setBalance={setBalance}
           user={props.user}
           displayName={props.displayName}
           setShowTransferModal={setShowTransferModal}
