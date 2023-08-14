@@ -99,8 +99,8 @@ const TransferModal = (props) => {
     } catch (error) {
       console.error("Error transferring funds:", error);
     }
+    props.setTransact((trans) => !trans);
     transferAmountRef.current.value = 0;
-    props.setTransacted((trans) => !trans);
 
     setLoading(false);
     setTransferBtnDisabled(false);

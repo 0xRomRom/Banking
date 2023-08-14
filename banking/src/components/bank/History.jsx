@@ -1,16 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUpRightAndDownLeftFromCenter,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import stl from "./History.module.css";
 import { useState, useEffect } from "react";
 import { get, getDatabase, ref, set, push } from "firebase/database";
 
 const db = getDatabase();
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
 
 const History = (props) => {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
@@ -20,6 +17,7 @@ const History = (props) => {
       get(dbref, "transactions/" + props.displayName + "/").then((snapshot) => {
         const data = snapshot.val();
         if (data.transactions[props.displayName]) {
+          if (data.transactions === undefined) return;
           const converted = Object.entries(
             data.transactions[props.displayName]
           );
@@ -27,7 +25,7 @@ const History = (props) => {
         }
       });
     }
-  }, [props.displayName, props.transacted]);
+  }, [props.displayName, props.transact]);
 
   const [sortOrder, setSortOrder] = useState({
     type: "asc",
@@ -164,18 +162,24 @@ const History = (props) => {
         </ul>
       </div>
       <div className={stl.listGrid}>
-        {filteredTransactions.map((item) => {
-          return (
-            <div className={stl.gridRow} key={Math.random()}>
-              <span className={`${stl.rowSpan} ${stl.centered}`}>
-                {item[1].type}
-              </span>
-              <span className={stl.rowSpan}>{item[1].date.slice(0, 25)}</span>
-              <span className={stl.rowSpan}>{item[1].toFrom}</span>
-              <span className={stl.rowSpan}>{item[1].amount}</span>
-            </div>
-          );
-        })}
+        {filteredTransactions.length === 0 ? (
+          <div className={stl.noTransactions}>
+            No Transactions <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </div>
+        ) : (
+          filteredTransactions.map((item) => {
+            return (
+              <div className={stl.gridRow} key={Math.random()}>
+                <span className={`${stl.rowSpan} ${stl.centered}`}>
+                  {item[1].type}
+                </span>
+                <span className={stl.rowSpan}>{item[1].date.slice(0, 25)}</span>
+                <span className={stl.rowSpan}>{item[1].toFrom}</span>
+                <span className={stl.rowSpan}>{item[1].amount}</span>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

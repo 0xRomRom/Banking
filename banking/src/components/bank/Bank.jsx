@@ -11,7 +11,7 @@ const Bank = (props) => {
   const navigate = useNavigate();
   const [hasDisplayName, setHasDisplayName] = useState(false);
   const [displayName, setDisplayName] = useState("");
-  const [transacted, setTransacted] = useState(false);
+  const [transact, setTransact] = useState(false);
 
   useEffect(() => {
     if (Object.keys(props.user).length === 0) {
@@ -42,9 +42,9 @@ const Bank = (props) => {
       <UserStats
         user={props.user}
         displayName={displayName}
-        setTransacted={setTransacted}
+        setTransact={setTransact}
       />
-      <History displayName={displayName} transacted={transacted} />
+      <History displayName={displayName} transact={transact} />
     </div>
   );
 };

@@ -104,7 +104,6 @@ const Login = (props) => {
         registryUsernameRef.current.value + "@gmail.com",
         registryPasswordRef.current.value
       );
-      console.log(newUser);
       newUser.uid = register.user.uid;
       await set(ref(db, "users/" + register.user.uid), newUser);
 
