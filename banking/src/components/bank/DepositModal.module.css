@@ -1,0 +1,260 @@
+.container {
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.89);
+  width: 100vw;
+  height: 100vh;
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: rgb(38, 117, 220);
+  width: 30rem;
+  height: 30rem;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  padding-left: 3rem;
+}
+
+.actionbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* background-color: black; */
+}
+
+.balanceBox {
+  position: relative;
+  width: 100%;
+  height: 7rem;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.balance {
+  font-size: 16px;
+  color: rgb(201, 200, 200);
+  font-family: "Open Sans";
+  position: relative;
+}
+
+.balanceAmount {
+  font-size: 28px;
+  color: white;
+  font-family: "Open Sans";
+  position: relative;
+  display: block;
+  user-select: none;
+}
+
+.fromToBox {
+  position: relative;
+  width: 100%;
+  height: 23rem;
+  margin-top: 3rem;
+  /* background-color: red; */
+  padding-left: 3rem;
+}
+
+.from {
+  font-size: 16px;
+  color: rgb(201, 200, 200);
+  font-family: "Open Sans";
+  position: relative;
+  display: block;
+}
+
+.spender {
+  font-size: 18px;
+  color: white;
+  font-family: "Open Sans";
+  position: relative;
+}
+
+.amount {
+  font-size: 18px;
+  color: rgb(201, 200, 200);
+  font-family: "Open Sans";
+  position: relative;
+  display: block;
+  margin-top: 2rem;
+}
+
+.maxAmount {
+  font-size: 18px;
+  color: white;
+  font-family: "Open Sans";
+  position: relative;
+  display: block;
+}
+
+.red {
+  color: red;
+}
+
+.inputBox {
+  position: relative;
+  display: block;
+  width: 7rem;
+  height: 2rem;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid white;
+  background-color: transparent;
+  padding-left: 1rem;
+  color: white;
+  font-family: "Open Sans";
+  font-size: 18px;
+}
+
+.inputBoxRed {
+  border-bottom: 2px solid white;
+  color: red;
+}
+
+.inputBox::placeholder {
+  color: white;
+  font-family: "Open Sans";
+}
+
+.dollar {
+  position: absolute;
+  font-family: "Open Sans";
+  font-size: 20px;
+  top: 15.7rem;
+}
+.dollarRed {
+  color: red;
+  position: absolute;
+  font-family: "Open Sans";
+  font-size: 20px;
+  top: 15.7rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.close {
+  position: absolute;
+  left: 95%;
+  font-size: 1.5rem;
+  color: lightgray;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.close:hover {
+  color: white;
+}
+
+.to {
+  font-size: 16px;
+  color: rgb(201, 200, 200);
+  font-family: "Open Sans";
+  position: relative;
+  display: block;
+  margin-top: 3rem;
+}
+
+.recipientsBox {
+  position: relative;
+  width: 25rem;
+  height: 8rem;
+  top: 0.8rem;
+  /* background-color: black; */
+  left: -0.2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.user {
+  position: relative;
+  width: 20rem;
+  color: white;
+  display: block;
+  font-size: 18px;
+  margin: 0.2rem 0rem;
+  padding: 0rem 0.4rem;
+  left: -0.2rem;
+  cursor: pointer;
+  font-family: "Open Sans";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user:hover {
+  background-color: rgb(122, 122, 222);
+}
+
+.pickedRecipient {
+  font-size: 18px;
+  color: white;
+  font-family: "Open Sans";
+  position: relative;
+  display: block;
+}
+
+.listIcon {
+  font-size: 1.5rem;
+  color: lightgray;
+  display: block;
+  position: relative;
+  left: 20rem;
+  top: -3rem;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.listIcon:hover {
+  color: white;
+}
+
+.bankAccount {
+  padding-left: 1rem;
+  font-size: 12px;
+  color: lightgray;
+}
+
+.bankAccountListed {
+  font-size: 12px;
+  color: lightgray;
+}
+
+.requestBtn {
+  display: block;
+  width: 86%;
+  height: 2rem;
+  background-color: rgb(237, 237, 19);
+  color: black;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6rem;
+}
+
+.requestBtn:hover {
+  background-color: yellow;
+}

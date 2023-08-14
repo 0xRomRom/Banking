@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import TransferModal from "./TransferModal";
 import RequestLoanModal from "./RequestLoanModal";
 import RepayDebtModal from "./RepayDebtModal";
+import DepositModal from "./DepositModal";
 
 const db = getDatabase();
 
@@ -14,6 +15,7 @@ const UserStats = (props) => {
   const [showTransferModal, setShowTransferModal] = useState(false);
   const [showRequestLoanModal, setShowRequestLoanModal] = useState(false);
   const [showRepayDebtModal, setShowRepayDebtModal] = useState(false);
+  const [showDepositModal, setShowDepositModal] = useState(false);
 
   useEffect(() => {
     const dbref = ref(db);
@@ -38,6 +40,10 @@ const UserStats = (props) => {
     setShowRepayDebtModal(() => !showRepayDebtModal);
   };
 
+  const openDepositModal = () => {
+    setShowDepositModal(() => !showDepositModal);
+  };
+
   return (
     <>
       <div className={stl.container}>
@@ -55,7 +61,9 @@ const UserStats = (props) => {
           <h2 className={stl.balanceTitle}>Savings</h2>
           <span className={stl.balanceAmount}>$ {savings}</span>
           <div className={stl.statsCtaBtnBox}>
-            <button className={stl.depositBtn}>Deposit</button>
+            <button className={stl.depositBtn} onClick={openDepositModal}>
+              Deposit
+            </button>
             <button className={stl.withdrawBtn}>Withdraw</button>
           </div>
         </div>
@@ -105,6 +113,18 @@ const UserStats = (props) => {
           balance={balance}
           setBalance={setBalance}
           setShowRepayDebtModal={setShowRepayDebtModal}
+          user={props.user}
+          setTransact={props.setTransact}
+        />
+      )}
+      {showDepositModal && (
+        <DepositModal
+          borrowed={borrowed}
+          setBorrowed={setBorrowed}
+          balance={balance}
+          setBalance={setBalance}
+          setSavings={setSavings}
+          setShowDepositModal={setShowDepositModal}
           user={props.user}
           setTransact={props.setTransact}
         />

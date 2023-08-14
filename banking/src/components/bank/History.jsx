@@ -188,7 +188,9 @@ const History = (props) => {
                 </span>
                 <span className={stl.rowSpan}>{item[1].date.slice(0, 25)}</span>
                 <span className={stl.rowSpan}>
-                  {item[1].type === "Loan (in)" || item[1].type === "Loan (out)"
+                  {item[1].type === "Loan (in)" ||
+                  item[1].type === "Loan (out)" ||
+                  item[1].type === "Deposit"
                     ? "Bank"
                     : item[1].toFrom}
                 </span>
