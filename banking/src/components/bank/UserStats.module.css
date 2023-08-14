@@ -2,7 +2,6 @@
   position: relative;
   width: 98%;
   left: 1%;
-  height: 17rem;
   background-color: rgb(116, 116, 221);
   background: linear-gradient(
     90deg,
@@ -14,6 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 1rem;
 }
 
 .balanceBlock {

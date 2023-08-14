@@ -1,11 +1,11 @@
 .navbar {
   width: 100vw;
-  height: 4rem;
+  height: 7rem;
   background-color: rgb(38, 117, 220);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   position: relative;
   z-index: 10;
 }

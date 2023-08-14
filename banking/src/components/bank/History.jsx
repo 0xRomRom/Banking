@@ -18,30 +18,25 @@ const History = (props) => {
   const fetchTransactionList = async () => {
     if (!props.displayName) return;
     if (props.displayName) {
+      setFilteredTransactions([]);
       const dbref = ref(db);
-      await Promise.all[
-        (get(dbref, "transactions/" + props.displayName + "/").then(
-          (snapshot) => {
-            const data = snapshot.val();
-            if (!data.transactions) return;
-            const converted = Object.entries(
-              data.transactions[props.displayName]
-            );
-            return setFilteredTransactions(converted);
+
+      get(dbref, "transactions/").then((snapshot) => {
+        const data = snapshot.val();
+        if (!data.transactions) return;
+        let tempArray = [];
+
+        for (const key in data.transactions["Bank"]) {
+          if (data.transactions["Bank"][key].toFrom === props.displayName) {
+            tempArray.push([key, data.transactions["Bank"][key]]);
           }
-        ),
-        await get(dbref, "transactions/" + "Bank" + "/").then((snapshot) => {
-          const data = snapshot.val();
-          if (data.transactions === undefined) return;
-          let tempArray = [];
-          for (const key in data.transactions["Bank"]) {
-            if (data.transactions["Bank"][key].toFrom === props.displayName) {
-              tempArray.push([key, data.transactions["Bank"][key]]);
-            }
-          }
-          return setFilteredTransactions((prev) => [...prev, ...tempArray]);
-        }))
-      ];
+        }
+
+        for (const key in data.transactions[props.displayName]) {
+          tempArray.push([key, data.transactions[props.displayName][key]]);
+        }
+        setFilteredTransactions((prev) => [...prev, ...tempArray]);
+      });
     }
   };
 
