@@ -21,8 +21,9 @@ const Bank = (props) => {
       setHasDisplayName(false);
       return;
     }
+    setDisplayName(props.user.user?.displayName);
     setHasDisplayName(true);
-  }, [props.user, navigate, props.user.user?.displayName]);
+  }, [props.user, navigate, props.user.user?.displayName, displayName]);
   return (
     <div className={stl.bankpage}>
       <NavBar
@@ -38,7 +39,7 @@ const Bank = (props) => {
         />
       )}
       <UserStats user={props.user} displayName={displayName} />
-      <History />
+      <History displayName={displayName} />
     </div>
   );
 };

@@ -105,11 +105,11 @@ const TransferModal = (props) => {
   };
 
   const addTransaction = async (amount, type, to, from) => {
-    const timestamp = Date.now(); // You can adjust the timestamp logic as needed
+    const timestamp = new Date();
 
     const transactionData = {
       amount: amount,
-      date: timestamp,
+      date: timestamp.toString(),
       toFrom: to,
       type: type,
     };

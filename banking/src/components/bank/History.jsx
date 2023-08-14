@@ -1,85 +1,31 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
 import stl from "./History.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { get, getDatabase, ref, set, push } from "firebase/database";
 
-const History = () => {
-  const transactions = [
-    {
-      type: "In",
-      date: "2023-05-11",
-      toFrom: "Demian",
-      amount: 133.2,
-    },
-    {
-      type: "Out",
-      date: "2023-06-15",
-      toFrom: "Amber",
-      amount: 219,
-    },
-    {
-      type: "In",
-      date: "2023-03-12",
-      toFrom: "James B",
-      amount: 513.2,
-    },
-    {
-      type: "Out",
-      date: "2023-06-15",
-      toFrom: "Amber",
-      amount: 219,
-    },
-    {
-      type: "In",
-      date: "2023-03-12",
-      toFrom: "James B",
-      amount: 513.2,
-    },
-    {
-      type: "Out",
-      date: "2024-04-19",
-      toFrom: "Lisa",
-      amount: 419,
-    },
-    {
-      type: "In",
-      date: "2022-11-23",
-      toFrom: "James B",
-      amount: 15,
-    },
-    {
-      type: "Out",
-      date: "2023-10-21",
-      toFrom: "Bob Marley",
-      amount: 99,
-    },
-    {
-      type: "In",
-      date: "2022-12-12",
-      toFrom: "James B",
-      amount: 133.2,
-    },
-    {
-      type: "Out",
-      date: "2022-05-11",
-      toFrom: "Bob Marley",
-      amount: 419,
-    },
-    {
-      type: "In",
-      date: "2023-02-05",
-      toFrom: "James B",
-      amount: 133.2,
-    },
-    {
-      type: "Out",
-      date: "2023-09-15",
-      toFrom: "Bob Marley",
-      amount: 419,
-    },
-  ];
-  const [filteredTransactions, setFilteredTransactions] =
-    useState(transactions);
+const db = getDatabase();
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
+const History = (props) => {
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
+  useEffect(() => {
+    if (props.displayName) {
+      console.log(props.displayName);
+      const dbref = ref(db);
+      get(dbref, "transactions/" + props.displayName + "/").then((snapshot) => {
+        const data = snapshot.val();
+        const converted = Object.entries(data.transactions[props.displayName]);
+        setFilteredTransactions(converted);
+      });
+    }
+  }, [props.displayName]);
+
   const [sortOrder, setSortOrder] = useState({
     type: "asc",
     date: "asc",
@@ -216,14 +162,15 @@ const History = () => {
       </div>
       <div className={stl.listGrid}>
         {filteredTransactions.map((item) => {
+          console.log(item[1].date);
           return (
             <div className={stl.gridRow} key={Math.random()}>
               <span className={`${stl.rowSpan} ${stl.centered}`}>
-                {item.type}
+                {item[1].type}
               </span>
-              <span className={stl.rowSpan}>{item.date}</span>
-              <span className={stl.rowSpan}>{item.toFrom}</span>
-              <span className={stl.rowSpan}>{item.amount}</span>
+              <span className={stl.rowSpan}>{item[1].date.slice(0, 25)}</span>
+              <span className={stl.rowSpan}>{item[1].toFrom}</span>
+              <span className={stl.rowSpan}>{item[1].amount}</span>
             </div>
           );
         })}
