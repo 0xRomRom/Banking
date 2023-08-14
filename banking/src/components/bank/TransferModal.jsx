@@ -15,6 +15,7 @@ const TransferModal = (props) => {
   const transferAmountRef = useRef(null);
   const [transferBtnDisabled, setTransferBtnDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [insuffucientBalance, setInsufficientBalance] = useState(false);
 
   useEffect(() => {
     const dbref = ref(db);
@@ -37,6 +38,10 @@ const TransferModal = (props) => {
     const amount = +transferAmountRef.current.value;
     if (amount === 0 || isNaN(amount)) return;
 
+    if (amount > +props.balance) {
+      setInsufficientBalance(true);
+      return;
+    }
     setLoading(true);
     setTransferBtnDisabled(true);
 
@@ -87,12 +92,21 @@ const TransferModal = (props) => {
             <span className={stl.from}>From</span>
             <h2 className={stl.spender}>{props.user.user?.displayName}</h2>
             <span className={stl.amount}>Amount</span>
-            <label className={stl.dollar}>$</label>
+            <label
+              className={`${stl.dollar} ${
+                insuffucientBalance ? stl.dollarRed : ""
+              }`}
+            >
+              $
+            </label>
             <input
               type="number"
-              className={stl.inputBox}
+              className={`${stl.inputBox} ${
+                insuffucientBalance ? stl.inputBoxRed : ""
+              }`}
               placeholder="0.00"
               ref={transferAmountRef}
+              onChange={() => setInsufficientBalance(false)}
             />
             <span className={stl.to}>To</span>
             {!pickingRecipient && (

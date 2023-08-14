@@ -100,12 +100,24 @@
   font-size: 18px;
 }
 
+.inputBoxRed {
+  border-bottom: 2px solid white;
+  color: red;
+}
+
 .inputBox::placeholder {
   color: white;
   font-family: "Open Sans";
 }
 
 .dollar {
+  position: absolute;
+  font-family: "Open Sans";
+  font-size: 20px;
+  top: 7rem;
+}
+.dollarRed {
+  color: red;
   position: absolute;
   font-family: "Open Sans";
   font-size: 20px;
