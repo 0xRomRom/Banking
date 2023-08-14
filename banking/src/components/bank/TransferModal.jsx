@@ -2,7 +2,7 @@ import stl from "./TransferModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faList } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
-import { get, getDatabase, ref, set } from "firebase/database";
+import { get, getDatabase, ref, set, push } from "firebase/database";
 import { ThreeCircles } from "react-loader-spinner";
 
 const db = getDatabase();
@@ -54,16 +54,45 @@ const TransferModal = (props) => {
           const recipientsBalance = +data.users[recipientUID].balance;
           const newBalance = recipientsBalance + amount;
           data.users[recipientUID].balance = newBalance;
-          let newData = data.users[recipientUID];
+
+          const newDate = new Date();
+          const tx = {
+            type: "In",
+            date: newDate,
+            toFrom: props.displayName,
+            amount: amount,
+          };
+
+          addTransaction(
+            amount,
+            "In",
+            data.users[props.user.user.uid].displayName,
+            data.users[recipientUID].displayName
+          );
+          const newData = data.users[recipientUID];
           return set(ref(db, "users/" + recipientUID), newData);
         }),
         get(dbref, "users/" + props.user.user.uid).then((snapshot) => {
           let data = snapshot.val();
           const spendersBalance = +data.users[props.user.user.uid].balance;
           const newBalance = spendersBalance - amount;
-          props.setBalance(newBalance);
           data.users[props.user.user.uid].balance = newBalance;
-          let newData = data.users[props.user.user.uid];
+
+          const newDate = new Date();
+          const tx = {
+            type: "Out",
+            date: newDate,
+            toFrom: data.users[props.user.user.uid].displayName,
+            amount: amount,
+          };
+          addTransaction(
+            amount,
+            "Out",
+            data.users[recipientUID].displayName,
+            data.users[props.user.user.uid].displayName
+          );
+          props.setBalance(newBalance);
+          const newData = data.users[props.user.user.uid];
           return set(ref(db, "users/" + props.user.user.uid), newData);
         }),
       ]);
@@ -73,6 +102,27 @@ const TransferModal = (props) => {
 
     setLoading(false);
     setTransferBtnDisabled(false);
+  };
+
+  const addTransaction = async (amount, type, to, from) => {
+    const timestamp = Date.now(); // You can adjust the timestamp logic as needed
+
+    const transactionData = {
+      amount: amount,
+      date: timestamp,
+      toFrom: to,
+      type: type,
+    };
+    await set(
+      ref(
+        db,
+        "transactions/" +
+          from +
+          "/" +
+          (Math.random() * 100000000).toFixed(0).toString()
+      ),
+      transactionData
+    );
   };
 
   return (
