@@ -258,3 +258,10 @@ input[type="number"] {
 .requestBtn:hover {
   background-color: yellow;
 }
+
+@media (max-width: 580px) {
+  .modal {
+    transform: scale(0.9);
+    margin-bottom: 3rem;
+  }
+}

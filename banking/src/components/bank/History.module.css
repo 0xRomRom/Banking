@@ -46,7 +46,7 @@
   cursor: pointer;
   transition: all 0.1s ease-in-out;
   width: 20%;
-  padding-left: 1rem;
+  padding-left: 2rem;
   user-select: none;
 }
 .list:hover {
@@ -72,6 +72,7 @@
   gap: 0.5rem;
   max-height: 30rem;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .gridRow {
@@ -110,4 +111,51 @@
   width: 100%;
   gap: 1rem;
   color: lightgray;
+}
+
+
+@media (max-width: 1150px) {
+
+  .gridRow {
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+  .rowSpan {
+    width: 22%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 580px) {
+  .list {
+    width: 25%;
+  }
+  .rowSpan {
+   width: initial;
+    font-size: 12px;
+    width: 3rem;
+  }
+  .centered {
+    padding-left: 0rem;
+  }
+  .gridRow {
+    justify-content: center;
+    padding-left: 0;
+    gap: 2rem;
+    padding: 0rem 0.3rem;
+  }
+  .filterRow {
+    padding: 0;
+  }
+  .list {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wider {
+    width: 10rem;
+    padding: 0;
+  }
+
 }

@@ -72,3 +72,10 @@
   text-align: end;
   padding-right: 0.7rem;
 }
+
+@media (max-width: 370px) {
+  .username {
+    width: 10rem;
+    padding-right: 0.1rem
+  }
+}

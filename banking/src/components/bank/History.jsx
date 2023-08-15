@@ -189,7 +189,7 @@ const History = (props) => {
                 <span className={`${stl.rowSpan} ${stl.centered}`}>
                   {item[1].type}
                 </span>
-                <span className={stl.rowSpan}>{item[1].date.slice(0, 25)}</span>
+                <span className={`${stl.rowSpan} ${stl.wider}`}>{item[1].date.slice(0, 25)}</span>
                 <span className={stl.rowSpan}>
                   {item[1].type === "Loan (in)" ||
                   item[1].type === "Loan (out)" ||

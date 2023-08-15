@@ -246,3 +246,18 @@ input[type="number"] {
 .transferBtn:hover {
   background-color: yellow;
 }
+
+
+@media (max-width: 580px) {
+  .modal {
+    transform: scale(0.9);
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    transform: scale(0.754);
+ 
+  }
+}
