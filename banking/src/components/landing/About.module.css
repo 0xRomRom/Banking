@@ -1,6 +1,5 @@
 .container {
   position: relative;
-  width: 100vw;
   height: 60rem;
   background-color: blue;
   background: linear-gradient(

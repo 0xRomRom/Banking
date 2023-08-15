@@ -13,6 +13,7 @@ import NavBar from "./NavBar";
 import { ThreeCircles } from "react-loader-spinner";
 import { getDatabase, ref, set } from "firebase/database";
 
+
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {

@@ -1,7 +1,6 @@
 import stl from "./NavBar.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/BankLogo.png"
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -12,11 +11,7 @@ const NavBar = () => {
 
   return (
     <nav className={stl.navbar}>
-      <FontAwesomeIcon
-        icon={faBuildingColumns}
-        className={stl.logo}
-        onClick={redirectHandler}
-      />
+      <img src={logo} alt="Bank" className={stl.logo} onClick={redirectHandler} />
       <div className={stl.ctawrapper}></div>
     </nav>
   );

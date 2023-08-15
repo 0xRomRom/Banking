@@ -59,6 +59,7 @@
   margin-top: 3rem;
   /* background-color: red; */
   padding-left: 3rem;
+  overflow: hidden;
 }
 
 .from {
@@ -161,7 +162,7 @@ input[type="number"] {
 
 .recipientsBox {
   position: relative;
-  width: 25rem;
+  width: 30rem;
   height: 8rem;
   top: 0.8rem;
   /* background-color: black; */
@@ -175,7 +176,7 @@ input[type="number"] {
 
 .user {
   position: relative;
-  width: 20rem;
+  width: 25rem;
   color: white;
   display: block;
   font-size: 18px;

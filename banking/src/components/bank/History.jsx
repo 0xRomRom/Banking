@@ -4,14 +4,14 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import stl from "./History.module.css";
-import { useState, useEffect,useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { get, getDatabase, ref } from "firebase/database";
 
 const db = getDatabase();
 
 const History = (props) => {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
-  
+
   const fetchTransactionList = useCallback(async () => {
     if (!props.displayName) return;
     if (props.displayName) {
@@ -42,8 +42,6 @@ const History = (props) => {
   }, [props.transact, props.displayName, fetchTransactionList]);
 
   // Rest of your component code remains the same...
-
-
 
   const [sortOrder, setSortOrder] = useState({
     type: "asc",

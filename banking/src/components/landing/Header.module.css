@@ -2,7 +2,6 @@
 
 .container {
   position: relative;
-  width: 100vw;
   height: 55rem;
   background-color: white;
   display: flex;
