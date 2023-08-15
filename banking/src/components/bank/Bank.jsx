@@ -18,6 +18,10 @@ const Bank = (props) => {
       navigate("/login");
       return;
     }
+    if (!props.user) {
+      navigate("/login");
+      return;
+    }
     if (props.user.user.displayName === null) {
       setHasDisplayName(false);
       return;

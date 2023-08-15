@@ -6,6 +6,7 @@ import RequestLoanModal from "./RequestLoanModal";
 import RepayDebtModal from "./RepayDebtModal";
 import DepositModal from "./DepositModal";
 import WithdrawModal from "./WithdrawModal";
+import { useNavigate } from "react-router-dom";
 
 const db = getDatabase();
 
@@ -18,9 +19,14 @@ const UserStats = (props) => {
   const [showRepayDebtModal, setShowRepayDebtModal] = useState(false);
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const dbref = ref(db);
+    if (!props.user.user) {
+      navigate("/login");
+      return;
+    }
 
     get(child(dbref, "users/" + props.user.user.uid)).then((snapshot) => {
       const data = snapshot.val();
@@ -28,7 +34,7 @@ const UserStats = (props) => {
       setSavings(data.savings);
       setBorrowed(data.borrowed);
     });
-  }, [props.user.user.uid]);
+  }, []);
 
   const openTransferModal = () => {
     setShowTransferModal(() => !showTransferModal);
