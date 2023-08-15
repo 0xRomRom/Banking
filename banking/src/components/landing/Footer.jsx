@@ -10,10 +10,9 @@ const Footer = () => {
   };
 
   return (
-    <div className={stl.footer}>
+    <div className={stl.footer} name="register">
       <div className={stl.footerInner}>
         <div className={stl.footerLeftblock}>
-          {/* <FontAwesomeIcon icon={faBuildingColumns} className={stl.biglogo} /> */}
           <img src={logo} alt="Bank Logo" className={stl.biglogo} />
         </div>
         <div className={stl.footerRightblock}>

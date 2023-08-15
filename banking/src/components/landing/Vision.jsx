@@ -2,7 +2,7 @@ import stl from "./Vision.module.css";
 
 const Vision = () => {
   return (
-    <div className={stl.container}>
+    <div className={stl.container} name="vision">
       <div className={stl.copyContainer}>
         <p className={stl.copy}>
           Experience a new era of financial freedom with Permissionless Banking.

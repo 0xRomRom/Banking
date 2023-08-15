@@ -6,6 +6,9 @@ import Vision from "./Vision";
 import Footer from "./Footer";
 
 const Landing = () => {
+
+
+
   return (
     <div className={stl.app}>
       <NavBar />

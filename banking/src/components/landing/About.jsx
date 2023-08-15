@@ -1,8 +1,9 @@
 import stl from "./About.module.css";
 
+
 const About = () => {
   return (
-    <div className={stl.container}>
+    <div className={stl.container} name="about">
       <div className={stl.containerInner}>
         <h1 className={stl.hero1}>Trustless</h1>
         <h2 className={stl.hero2}>Monetary</h2>
