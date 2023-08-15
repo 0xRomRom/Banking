@@ -1,7 +1,6 @@
 .bankpage {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  width: 100%;
   background-color: black;
   background-color: rgb(103, 139, 215);
   background-color: rgb(235, 233, 233);

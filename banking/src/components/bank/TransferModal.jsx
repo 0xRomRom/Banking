@@ -2,7 +2,7 @@ import stl from "./TransferModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faList } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
-import { get, getDatabase, ref, set, push } from "firebase/database";
+import { get, getDatabase, ref, set } from "firebase/database";
 import { ThreeCircles } from "react-loader-spinner";
 
 const db = getDatabase();
@@ -55,14 +55,6 @@ const TransferModal = (props) => {
           const newBalance = recipientsBalance + amount;
           data.users[recipientUID].balance = newBalance;
 
-          const newDate = new Date();
-          const tx = {
-            type: "In",
-            date: newDate,
-            toFrom: props.displayName,
-            amount: amount,
-          };
-
           addTransaction(
             amount,
             "In",
@@ -78,13 +70,6 @@ const TransferModal = (props) => {
           const newBalance = spendersBalance - amount;
           data.users[props.user.user.uid].balance = newBalance;
 
-          const newDate = new Date();
-          const tx = {
-            type: "Out",
-            date: newDate,
-            toFrom: data.users[props.user.user.uid].displayName,
-            amount: amount,
-          };
           addTransaction(
             amount,
             "Out",

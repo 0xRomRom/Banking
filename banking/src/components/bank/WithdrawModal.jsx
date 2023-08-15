@@ -1,8 +1,8 @@
 import stl from "./WithdrawModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faList } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect, useRef } from "react";
-import { get, getDatabase, ref, set, push } from "firebase/database";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useState, useRef } from "react";
+import { get, getDatabase, ref, set } from "firebase/database";
 import { ThreeCircles } from "react-loader-spinner";
 
 const db = getDatabase();
