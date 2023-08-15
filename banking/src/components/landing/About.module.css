@@ -89,3 +89,41 @@
   font-size: 25px;
   margin-top: 18rem;
 }
+
+@media (max-width: 1000px) {
+  .containerInner {
+    margin-left: 1rem;
+    margin-bottom: 30rem;
+  }
+  .copy {
+    font-size: 20px;
+    margin-top: 18rem;
+  }
+  .hero1,.hero2,.hero3,.hero4,.hero5 {
+    font-size: 30px;
+    padding-left: 1rem !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .containerInner {
+    margin-left: 1rem;
+    margin-bottom: 30rem;
+  }
+
+  .containerCopy {
+    width: 45%;
+  }
+  .copy {
+    font-size: 17px;
+    margin-top: 25rem;
+    position: relative;
+  }
+}
+
+@media (max-width: 420px) {
+  .copy {
+    font-size: 15px;
+    margin-top: 28rem;
+  }
+}

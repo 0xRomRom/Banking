@@ -78,3 +78,69 @@
   color: black;
   padding-left: 1rem;
 }
+
+@media (max-width: 1300px) {
+  .copy {
+    color: white;
+    font-family: "Open Sans";
+    width: 25rem;
+    font-size: 25px;
+    margin-top: 18rem;
+    margin-left: 2rem;
+  }
+  .containerInner {
+    margin-bottom: 25rem !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero1,.hero2,.hero3,.hero4,.hero5 {
+    font-size: 30px;
+    padding-left: 1rem !important;
+  }
+  .containerInner {
+    margin-bottom: 25rem !important;
+    width: 20rem;
+  }
+  .copy {
+    font-size: 20px;
+ 
+  }
+}
+
+@media (max-width: 800px) {
+  .containerInner {
+    margin-bottom: 30rem !important;
+    width: 20rem;
+  }
+  .copyContainer {
+    width: 30%;
+    margin-top: 25rem;
+    margin-left: 2rem;
+  }
+  .copy {
+    font-size: 17px;
+    position: relative;
+    margin: 0;
+    width: 14rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .containerInner {
+    margin-bottom: 35rem !important;
+    position: relative;
+    left: -1rem;
+  }
+  .copyContainer {
+    width: 30%;
+    margin-top: 43rem;
+    margin-left: 1rem;
+  }
+  .copy {
+    font-size: 17px;
+    position: relative;
+    margin: 0;
+    width: 14rem;
+  }
+}

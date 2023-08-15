@@ -87,3 +87,58 @@
   color: black;
   padding-left: 1rem;
 }
+
+@media (max-width: 1075px) {
+  .bannerImg {
+    width: 30rem;
+    height: 80%;
+  }
+ .hero1,.hero2,.hero3,.hero4,.hero5 {
+    font-size: 25px;
+    padding-left: 0.5rem !important;
+  }
+  .titleBox {
+    height: 20rem;
+    justify-content: space-between;
+  }
+  .innerContainer {
+    position: relative;
+    width: 62.5rem;
+    height: 25rem;
+    /* border: 1px solid red; */
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+}
+
+@media (max-width: 700px) {
+  .bannerImg {
+    width: 20rem;
+    height: 60%;
+  }
+  .hero1,.hero2,.hero3,.hero4,.hero5 {
+    font-size: 25px;
+    padding-left: 0.5rem !important;
+  }
+  .titleBox {
+    justify-content: space-between;
+    /* border: 1px solid red; */
+    /* margin-right: 20rem; */
+    margin-top: 1rem;
+  }
+  .innerContainer {
+    position: relative;
+    width: 62.5rem;
+    height: 25rem;
+    /* border: 1px solid red; */
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+ 
+}

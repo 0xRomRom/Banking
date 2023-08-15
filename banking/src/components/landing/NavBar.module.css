@@ -58,3 +58,9 @@
   background-color: black;
   color: yellow;
 }
+
+@media (max-width: 475px) {
+  .ctaUl {
+    width: 11rem;
+  }
+}
